@@ -66,3 +66,7 @@ video {
   height: 100%;
   object-fit: cover;
 }
+
+button[disabled=disabled], button:disabled {
+ cursor: not-allowed;
+}
