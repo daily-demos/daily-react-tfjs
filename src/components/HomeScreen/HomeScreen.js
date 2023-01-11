@@ -16,7 +16,7 @@ export default function HomeScreen({ startJoiningCall }) {
       <form method="post" onSubmit={handleSubmit} className="url-form">
         <label htmlFor="userName">User name</label>
         <input type="text" id="userName" name="userName" defaultValue="Billie Jean" />
-        <label htmlFor="roomUrl">Room URL </label>
+        <label htmlFor="roomUrl">Room URL (must be a room that has prejoin disabled)</label>
         <input
           type="text"
           id="roomUrl"
