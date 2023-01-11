@@ -6,7 +6,6 @@ import Username from '../Username/Username';
 
 export default function Tile({ id, isLocal }) {
   const videoEl = useRef(null);
-  const localSessionId = useLocalSessionId();
   const videoState = useMediaTrack(id, 'video');
 
   return (
@@ -19,7 +18,6 @@ export default function Tile({ id, isLocal }) {
       ) : (
         <div className="no-video">No video</div>
       )}
-      {/* <DailyVideo automirror sessionId={id} ref={videoEl} /> */}
       <Username id={id} isLocal={isLocal} />
     </div>
   );
