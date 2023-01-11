@@ -6,7 +6,7 @@
 
 This app includes:
 
-- A basic multi-participant call UI
+- A basic multi-participant call UI built with React and the [Daily React library](https://docs.daily.co/reference/daily-react)
 - Automatic hand gesture detection with [TensorFlowJS](https://github.com/tensorflow/tfjs) and [Fingerpose](https://github.com/andypotato/fingerpose)
 - Sending gestures to other call participants
 
