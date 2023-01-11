@@ -2,6 +2,12 @@
   position: relative;
 }
 
-.username {
-  background: white;
+.no-video {
+  color: var(--dark-blue);
+  background-color: var(--grey-lightest);
+  width: 320px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+justify-content: center;
 }

@@ -24,4 +24,5 @@
   padding: 4px;
   font-size: 0.8rem;
   width: 100%;
+  z-index: 2;
 }

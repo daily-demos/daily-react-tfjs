@@ -6,7 +6,7 @@
 This app includes:
 
 - A basic multi-participant call UI
-- Automatic hand gesture detection with Fingerpose
+- Automatic hand gesture detection with [TensorFlowJS](https://github.com/tensorflow/tfjs) and [Fingerpose](https://github.com/andypotato/fingerpose)
 - Sending gestures to other call participants
 
 This is a demo app meant to showcase how to interact with the Daily APIs. It is not optimized for large calls. (Read our [large meetings series](https://www.daily.co/blog/tag/large-meeting-series/) for more information.)

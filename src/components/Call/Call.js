@@ -4,7 +4,6 @@ import {
   useLocalParticipant,
   useDailyEvent,
   useParticipantIds,
-  DailyAudio,
 } from '@daily-co/daily-react';
 
 import './Call.css';
@@ -35,11 +34,12 @@ export default function Call() {
   });
 
   /* This is for displaying our self-view. */
-  const localParticipant = useLocalParticipant();
   const remoteParticipantIds = useParticipantIds({ filter: 'remote' });
+  const localParticipant = useLocalParticipant();
 
   const renderCallScreen = () => (
     <div className="call">
+      {/* Emoji gesture sent by others */}
       {emojiMessage && (
         <div className="emoji-message">
           {messageSender} says {emojiMessage}!
@@ -47,12 +47,12 @@ export default function Call() {
       )}
       {/* Your self view */}
       {localParticipant && <Tile id={localParticipant.session_id} isLocal />}
+      {/* Remote participants */}
       {remoteParticipantIds && (
         <div className="remote-participants">
           {remoteParticipantIds.map((id) => (
             <Tile key={id} id={id} />
           ))}
-          <DailyAudio />
         </div>
       )}
     </div>

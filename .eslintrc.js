@@ -19,6 +19,7 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react/no-unescaped-entities': 'off',
     'no-restricted-syntax': 'off',
     'no-unused-vars': 'off',
   },
