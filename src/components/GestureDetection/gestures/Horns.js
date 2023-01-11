@@ -1,4 +1,4 @@
-import * as fp from "fingerpose";
+import * as fp from 'fingerpose';
 
 // describe sign of horns 🤘
 const hornsGesture = new fp.GestureDescription('horns');

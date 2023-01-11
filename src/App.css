@@ -25,7 +25,8 @@ p.small {
   font-size: 12px;
 }
 
-button {
+button,
+input {
   background-color: var(--turquoise);
   border: none;
   border-radius: 8px;
@@ -33,6 +34,19 @@ button {
   font-weight: 600;
   cursor: pointer;
   padding: 12px;
+}
+
+label {
+  font-size: 12px;
+  align-self: baseline;
+  padding: 3px;
+}
+input[type='text'] {
+  background-color: var(--white);
+  cursor: text;
+  margin-bottom: .5rem;
+  font-size: 1rem;
+  font-weight: normal;
 }
 
 video {

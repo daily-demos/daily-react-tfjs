@@ -17,3 +17,17 @@
 .home-screen p {
   color: var(--grey);
 }
+
+.url-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.url-form label {
+  color: var(--white);
+}
+
+.url-form input {
+  padding: 1rem;
+}

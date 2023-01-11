@@ -2,5 +2,26 @@
   position: relative;
   align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+}
+
+.remote-participants {
+  display: inline-flex;
+  margin-top: 5px;
+}
+
+.remote-participants video {
+  max-width: 320px;
+  max-height: 180px;
+}
+
+.emoji-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--grey);
+  padding: 4px;
+  font-size: 0.8rem;
+  width: 100%;
 }

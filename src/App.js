@@ -2,9 +2,7 @@ import './App.css';
 
 import React, { useEffect, useState, useCallback } from 'react';
 import DailyIframe from '@daily-co/daily-js';
-import { DailyProvider } from "@daily-co/daily-react"
-
-import api from './api';
+import { DailyProvider } from '@daily-co/daily-react';
 import { roomUrlFromPageUrl, pageUrlFromRoomUrl } from './utils';
 
 import HomeScreen from './components/HomeScreen/HomeScreen';
@@ -14,7 +12,6 @@ import Tray from './components/Tray/Tray';
 
 /* We decide what UI to show to users based on the state of the app, which is dependent on the state of the call object: see line 137. */
 const STATE_IDLE = 'STATE_IDLE';
-const STATE_CREATING = 'STATE_CREATING';
 const STATE_JOINING = 'STATE_JOINING';
 const STATE_JOINED = 'STATE_JOINED';
 const STATE_LEAVING = 'STATE_LEAVING';
@@ -24,42 +21,26 @@ export default function App() {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
-  const [apiError, setApiError] = useState(false);
 
   /**
    * Show the call UI if we're either joining, already joined, or are showing
    * an error.
    */
-  const showCall = [STATE_JOINING, STATE_JOINED, STATE_ERROR].includes(
-    appState,
-  );
-
-  /**
-   * Creates a new call room.
-   */
-  const createCall = useCallback(() => {
-    setAppState(STATE_CREATING);
-    return api
-      .createRoom()
-      .then((room) => room.url)
-      .catch((error) => {
-        console.error('Error creating room', error);
-        setRoomUrl(null);
-        setAppState(STATE_IDLE);
-        setApiError(true);
-      });
-  }, []);
+  const showCall = [STATE_JOINING, STATE_JOINED, STATE_ERROR].includes(appState);
 
   /**
    * Starts joining an existing call.
    */
-  const startJoiningCall = useCallback((url) => {
+  const startJoiningCall = useCallback((url, username) => {
     const newCallObject = DailyIframe.createCallObject();
+    newCallObject.setUserName(username)
+    newCallObject.join({ url });
+
+    // Set states
     setRoomUrl(url);
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
-    newCallObject.join({ url });
-  }, []);
+    }, []);
 
   /**
    * Starts leaving the current call.
@@ -85,9 +66,10 @@ export default function App() {
    * join the room.
    */
   useEffect(() => {
-    const url = roomUrlFromPageUrl();
-    // eslint-disable-next-line no-unused-expressions
-    url && startJoiningCall(url);
+    const pageUrl = roomUrlFromPageUrl();
+    if (pageUrl) {
+      startJoiningCall(pageUrl);
+    }
   }, [startJoiningCall]);
 
   /**
@@ -101,11 +83,6 @@ export default function App() {
 
   /**
    * Update app state based on reported meeting state changes.
-   *
-   * NOTE: Here we're showing how to completely clean up a call with destroy().
-   * This isn't strictly necessary between join()s, but is good practice when
-   * you know you'll be done with the call object for a while, and you're no
-   * longer listening to its events.
    */
   useEffect(() => {
     if (!callObject) return;
@@ -135,52 +112,29 @@ export default function App() {
     // Use initial state
     handleNewMeetingState();
 
-    // Listen for changes in state
-    // eslint-disable-next-line no-restricted-syntax
-    for (const event of events) {
-      /*
-        We can't use the useDailyEvent hook (https://docs.daily.co/reference/daily-react-hooks/use-daily-event) for this
-        because right now, we're not inside a <DailyProvider/> (https://docs.daily.co/reference/daily-react-hooks/daily-provider)
-        context yet. We can't access the call object via daily-react-hooks just yet, but we will later in Call.js.
-      */
+    events.forEach((event) => {
       callObject.on(event, handleNewMeetingState);
-    }
+    });
 
     // Stop listening for changes in state
     return function cleanup() {
-      // eslint-disable-next-line no-restricted-syntax
-      for (const event of events) {
+      events.forEach((event) => {
         callObject.off(event, handleNewMeetingState);
-      }
+      });
     };
   }, [callObject]);
 
   return (
     <div className="app">
       <Header />
-      {/* eslint-disable-next-line no-nested-ternary */}
-      {apiError ? (
-        <div className="api-error">
-          <h1>Error</h1>
-          <p>
-            Room could not be created. Please check your local configuration in
-            `api.js`. For more information, check out the{' '}
-            <a href="https://github.com/daily-demos/call-object-react-daily-hooks/blob/main/README.md">
-              readme
-            </a>{' '}
-            :)
-          </p>
-        </div>
-      ) : showCall ? (
+
+      {showCall ? (
         <DailyProvider callObject={callObject}>
           <Call />
           <Tray leaveCall={startLeavingCall} />
         </DailyProvider>
       ) : (
-        <HomeScreen
-          createCall={createCall}
-          startJoiningCall={startJoiningCall}
-        />
+        <HomeScreen startJoiningCall={startJoiningCall} />
       )}
     </div>
   );

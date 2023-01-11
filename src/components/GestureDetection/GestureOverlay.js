@@ -1,9 +1,19 @@
 import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import './GestureOverlay.css';
+import { useAppMessage, useLocalParticipant } from '@daily-co/daily-react';
 
 import * as fp from 'fingerpose';
 
 import hornsGesture from './gestures/Horns';
+import heartGesture from './gestures/Heart';
+import okGesture from './gestures/OK';
+import pointUpGesture from './gestures/PointUp';
+import raisedHandGesture from './gestures/RaisedHand';
+import thumbsUpGesture from './gestures/ThumbsUp';
+import thumbsDownGesture from './gestures/ThumbsDown';
+import victoryGesture from './gestures/Victory';
+import vulcanGesture from './gestures/Vulcan';
+
 import useModel from './hooks/useModel';
 import HandPoseLoader from './models/HandPose';
 
@@ -28,7 +38,17 @@ const gestureStrings = {
   horns: '🤘',
 };
 
-const knownGestures = [hornsGesture];
+const knownGestures = [
+  hornsGesture,
+  heartGesture,
+  okGesture,
+  pointUpGesture,
+  raisedHandGesture,
+  thumbsUpGesture,
+  thumbsDownGesture,
+  victoryGesture,
+  vulcanGesture,
+];
 
 const GestureOverlay = forwardRef((props, ref) => {
   const estimator = new fp.GestureEstimator(knownGestures);
@@ -46,10 +66,6 @@ const GestureOverlay = forwardRef((props, ref) => {
   const handleShowDebugClick = () => {
     setShowDebugInfo(!showDebugInfo);
   };
-
-  const handleEmojiGesture = useCallback((reaction) => {
-    console.log({ reaction });
-  }, []);
 
   /* Initialize canvas that we use to draw the dots on */
   useEffect(() => {
@@ -93,11 +109,12 @@ const GestureOverlay = forwardRef((props, ref) => {
 
       function findGesture(gesturePredictions) {
         const estimated = estimator.estimate(gesturePredictions.landmarks, 9.0);
+        setPoseData(estimated?.poseData);
+
         if (estimated.gestures.length > 0) {
           // find gesture with the highest match score
           const best = estimated.gestures.reduce((a, b) => (a.score > b.score ? a : b));
           setGesture(gestureStrings[best.name]);
-          setPoseData(estimated?.poseData);
         }
       }
 
@@ -128,11 +145,28 @@ const GestureOverlay = forwardRef((props, ref) => {
     }, 1000);
   }
 
+  const sendMessage = useAppMessage({
+    onAppMessage: () => {
+      console.log('broadcasting emoji reaction to the rest of the call...');
+    },
+  });
 
-  /* If a gesture is detected, send an emoji reaction to all participants in the call */
+  const localParticipant = useLocalParticipant();
+  const broadcastEmojiGesture = useCallback((reaction) => {
+    sendMessage(
+      {
+        messageName: 'emoji-reaction',
+        username: localParticipant?.user_name || localParticipant?.session_id,
+        reaction,
+      },
+      '*', // send emoji to everyone but the local participant
+    );
+  }, []);
+
+  /* If a gesture is detected, broadcast that gesture to other participants in the call */
   useEffect(() => {
     if (!gesture) return;
-    handleEmojiGesture(gesture);
+    broadcastEmojiGesture(gesture);
   }, [gesture]);
 
   useEffect(() => {
@@ -144,11 +178,11 @@ const GestureOverlay = forwardRef((props, ref) => {
   return (
     <>
       <canvas id="pose-canvas" className="layer" ref={canvasRef} />
-
+      <div className="gesture-emoji">{gesture && gesture}</div>
       <div className="hand-status">
         {!handDetected && (
           <>
-            <p>No hand detected</p>
+            <div className="badge">No hand detected</div>
             <button type="button" disabled>
               No info to show you
             </button>
@@ -157,7 +191,7 @@ const GestureOverlay = forwardRef((props, ref) => {
 
         {handDetected && (
           <>
-            <p>Hand detected!</p>
+            <div className="badge">Hand detected!</div>
             <button type="button" onClick={handleShowDebugClick}>
               {showDebugInfo ? 'Hide debug info' : 'Show debug info'}
             </button>

@@ -1,10 +1,5 @@
 import React, { useCallback } from 'react';
-import {
-  useDaily,
-  useLocalParticipant,
-  useVideoTrack,
-  useAudioTrack,
-} from '@daily-co/daily-react';
+import { useDaily, useLocalParticipant, useVideoTrack, useAudioTrack } from '@daily-co/daily-react';
 
 import './Tray.css';
 import { CameraOn, Leave, CameraOff, MicrophoneOff, MicrophoneOn } from './Icons';
