@@ -1,5 +1,5 @@
 import './Tile.css';
-import { DailyVideo, useLocalSessionId, useMediaTrack } from '@daily-co/daily-react';
+import { DailyVideo, useMediaTrack } from '@daily-co/daily-react';
 import { useRef } from 'react';
 import GestureOverlay from '../GestureDetection/GestureOverlay';
 import Username from '../Username/Username';

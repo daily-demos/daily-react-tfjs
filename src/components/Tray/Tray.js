@@ -24,7 +24,7 @@ export default function Tray({ leaveCall }) {
             {mutedVideo ? 'Turn camera on' : 'Turn camera off'}
           </button>
           <button disabled type="button">
-            <MicrophoneOff/>
+            <MicrophoneOff />
             Mic disabled for demo
           </button>
         </div>
