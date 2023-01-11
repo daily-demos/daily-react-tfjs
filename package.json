@@ -9,7 +9,6 @@
     "@tensorflow/tfjs": "^4.2.0",
     "@tensorflow/tfjs-core": "^3.21.0",
     "fingerpose": "^0.1.0",
-    "lint-staged": "^13.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
@@ -29,11 +28,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "CI=false react-scripts build",
-    "netlify-build": "CI=false sed -i.bak s/REACT_APP_DAILY_API_KEY_PLACEHOLDER/${REACT_APP_DAILY_API_KEY}/g netlify.toml && npm run build",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "lint:fix": "eslint 'src/**/*.{js,jsx}' --fix"
   },
+  "engines": { "node": "16.x" },
   "browserslist": {
     "production": [
       ">0.2%",

@@ -1,4 +1,5 @@
 # Daily React app with hand gesture detection
+[Open the app in CodeSandbox](https://codesandbox.io/s/github/daily-demos/daily-react-tfjs), or [see it in action here](https://890sio.csb.app/).
 
 ## Features
 
