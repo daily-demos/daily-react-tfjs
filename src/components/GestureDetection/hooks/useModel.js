@@ -1,3 +1,4 @@
+/* Adapted from https://codesandbox.io/s/react-blazepalm-rdst8 */
 import * as tf from '@tensorflow/tfjs';
 import { useCallback, useEffect, useRef, useState } from 'react';
 

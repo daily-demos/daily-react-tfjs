@@ -82,6 +82,7 @@ const GestureOverlay = forwardRef((props, ref) => {
     context.fill();
   }
 
+  /* Adapted from https://github.com/andypotato/fingerpose/ */
   async function startHandPose() {
     const canvas = canvasRef.current;
     const canvasContext = canvas.getContext('2d');
