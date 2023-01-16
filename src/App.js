@@ -9,7 +9,7 @@ import HomeScreen from './components/HomeScreen/HomeScreen';
 import Call from './components/Call/Call';
 import Header from './components/Header/Header';
 import Tray from './components/Tray/Tray';
-import Loader from './components/Loader/Loader'
+import Loader from './components/Loader/Loader';
 
 /* We decide what UI to show to users based on the state of the app, which is dependent on the state of the call object: see line 137. */
 const STATE_IDLE = 'STATE_IDLE';
@@ -22,6 +22,7 @@ export default function App() {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
+  const [model, setModel] = useState('gesture-detection');
 
   /**
    * Show the call UI if we're either joining, already joined, or are showing
@@ -33,12 +34,13 @@ export default function App() {
   const showError = [STATE_ERROR].includes(appState);
 
   /**
-   * Starts joining an existing call.
+   * Starts joining an existing call. This function is invoked from HomeScreen.js
    */
-  const startJoiningCall = useCallback((url, username) => {
+  const startJoiningCall = useCallback((url, username, selectedModel) => {
     const newCallObject = DailyIframe.createCallObject();
     newCallObject.setUserName(username);
     newCallObject.join({ url });
+    setModel(selectedModel);
 
     // Set states
     setRoomUrl(url);
@@ -134,12 +136,12 @@ export default function App() {
       {showLoading && (
         <div className="loading">
           <h1>Loading...</h1>
-          <Loader/>
+          <Loader />
         </div>
       )}
       {showCall && (
         <DailyProvider callObject={callObject}>
-          <Call />
+          <Call model={model} />
           <Tray leaveCall={startLeavingCall} />
         </DailyProvider>
       )}

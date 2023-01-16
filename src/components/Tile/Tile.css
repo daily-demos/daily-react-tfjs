@@ -11,3 +11,9 @@
   align-items: center;
   justify-content: center;
 }
+
+.suspense {
+  background: hotpink;
+  color: white;
+  font-size: 100px;
+}

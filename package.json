@@ -4,9 +4,9 @@
   "dependencies": {
     "@daily-co/daily-js": "^0.33.0",
     "@daily-co/daily-react": "^0.7.0",
+    "@tensorflow-models/coco-ssd": "^2.2.2",
     "@tensorflow-models/handpose": "^0.0.7",
     "@tensorflow/tfjs": "^4.2.0",
-    "@tensorflow/tfjs-core": "^3.21.0",
     "fingerpose": "^0.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -31,7 +31,9 @@
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "lint:fix": "eslint 'src/**/*.{js,jsx}' --fix"
   },
-  "engines": { "node": "16.x" },
+  "engines": {
+    "node": "16.x"
+  },
   "browserslist": {
     "production": [
       ">0.2%",

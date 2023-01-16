@@ -1,0 +1,32 @@
+.list {
+  list-style-position: inside;
+  background: rgba(0, 0, 0, 0.58);
+  color: white;
+  font-size: 12px;
+  border-radius: 8px;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+}
+
+.watching {
+  font-size: 2rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  transform: rotate(65deg);
+  animation: scan 1.5s infinite alternate-reverse;
+}
+
+@keyframes scan {
+  to {
+    transform: rotate(-110deg);
+  }
+}
+
+.object-emoji {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 100px;
+}
