@@ -4,9 +4,9 @@
   color: white;
   font-size: 12px;
   border-radius: 8px;
-  margin-right: .5rem;
-  margin-top: .5rem;
-  padding: .5rem;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
 }
 
 .watching {
@@ -23,7 +23,7 @@
   }
 }
 
-.cat-emoji {
+.object-emoji {
   position: absolute;
   top: 50%;
   left: 50%;

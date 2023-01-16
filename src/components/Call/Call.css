@@ -43,12 +43,11 @@
 .hand-status,
 .object-status {
   position: absolute;
-  top: .2rem;
-  right: .5rem;
+  top: 0.2rem;
+  right: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   z-index: 2;
   gap: 6px;
 }
-

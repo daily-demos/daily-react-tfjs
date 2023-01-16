@@ -1,6 +1,6 @@
 import './Tile.css';
 import { DailyVideo, useMediaTrack } from '@daily-co/daily-react';
-import React, {useRef, Suspense, useState, useEffect} from 'react';
+import React, { useRef, Suspense, useState, useEffect } from 'react';
 import Username from '../Username/Username';
 
 const ObjectDetection = React.lazy(() => import('../ObjectDetection/ObjectDetection'));
@@ -9,17 +9,17 @@ const GestureDetection = React.lazy(() => import('../GestureDetection/GestureDet
 export default function Tile({ id, isLocal, model }) {
   const videoEl = useRef(null);
   const videoState = useMediaTrack(id, 'video');
-  const [gestureDetectionEnabled, setGestureDetectionEnabled] = useState(false)
-  const [objectDetectionEnabled, setObjectDetectionEnabled] = useState(false)
+  const [gestureDetectionEnabled, setGestureDetectionEnabled] = useState(false);
+  const [objectDetectionEnabled, setObjectDetectionEnabled] = useState(false);
 
   useEffect(() => {
     if (model === 'gesture-detection') {
-      setGestureDetectionEnabled(true)
+      setGestureDetectionEnabled(true);
     }
     if (model === 'object-detection') {
-      setObjectDetectionEnabled(true)
+      setObjectDetectionEnabled(true);
     }
-  }, [model])
+  }, [model]);
 
   return (
     <div className="tile-video">

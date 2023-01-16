@@ -9,7 +9,7 @@ const ObjectDetection = forwardRef((props, ref) => {
   const { modelLoaded, modelRef } = useModel('cpu', CocoSSDLoader);
   const [objectPredictions, setObjectPredictions] = useState([]);
   const [isWatching, setIsWatching] = useState(false);
-  const [showCatEmoji, setShowCatEmoji] = useState(false);
+  const [objectEmoji, setObjectEmoji] = useState('');
 
   const internalRef = useRef(null);
   const videoRef = ref || internalRef;
@@ -42,10 +42,12 @@ const ObjectDetection = forwardRef((props, ref) => {
   }
 
   useEffect(() => {
-    if (objectPredictions.includes('cell phone') || objectPredictions.includes('cat')) {
-      setShowCatEmoji(true);
+    if (objectPredictions.includes('cell phone')) {
+      setObjectEmoji('📱');
+    } else if (objectPredictions.includes('cat')) {
+      setObjectEmoji('🐈');
     } else {
-      setShowCatEmoji(false);
+      setObjectEmoji('');
     }
   }, [objectPredictions]);
 
@@ -53,13 +55,13 @@ const ObjectDetection = forwardRef((props, ref) => {
     clearTimeout(timeout1);
     setIsWatching(false);
     setObjectPredictions([]);
-    setShowCatEmoji(false);
+    setObjectEmoji('');
     console.log('🔶 Stopped scanning for objects.');
   };
 
   return (
     <>
-      {showCatEmoji && <div className="cat-emoji">🐈</div>}
+      {objectEmoji && <div className="object-emoji">{objectEmoji}</div>}
 
       <div className="object-status">
         <div className="badge">
@@ -67,12 +69,12 @@ const ObjectDetection = forwardRef((props, ref) => {
         </div>
         {isWatching && modelLoaded && (
           <button type="button" onClick={stopCocoSsd}>
-            Stop cat scan
+            Stop object scan
           </button>
         )}
         {!isWatching && modelLoaded && (
           <button type="button" onClick={startCocoSsd}>
-            Start cat scan
+            Start object scan
           </button>
         )}
 

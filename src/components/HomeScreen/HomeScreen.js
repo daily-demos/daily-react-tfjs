@@ -26,9 +26,11 @@ export default function HomeScreen({ startJoiningCall }) {
           type="text"
           id="roomUrl"
           name="roomUrl"
-          defaultValue="https://devrel.daily.co/hello-devrel"
+          defaultValue="https://your-domain.daily.co/your-room"
         />
-        <button style={{ marginTop: '1rem'}} type="submit">Start call</button>
+        <button style={{ marginTop: '1rem' }} type="submit">
+          Start call
+        </button>
       </form>
       <p className="small">Select “Allow” to use your camera and mic for this call if prompted</p>
     </div>
