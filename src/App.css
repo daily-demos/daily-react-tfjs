@@ -2,8 +2,6 @@
   background-color: var(--darkest-blue);
   min-height: 100vh;
   display: grid;
-  /* this is where we're dividing our app in 3 rows: header, call, and tray. The meeting information
-  is outside the app's document flow.*/
   grid-template-rows: 4rem 1fr 4rem;
 }
 
@@ -44,21 +42,31 @@ input {
   border-radius: 8px;
   font-size: 12px;
   font-weight: 600;
+  padding: .8rem;
   cursor: pointer;
-  padding: 12px;
 }
 
 label {
   font-size: 12px;
   align-self: baseline;
-  padding: 3px;
+  margin-bottom: .5rem;
+  margin-top: 1.5rem;
 }
+
 input[type='text'] {
   background-color: var(--white);
   cursor: text;
   margin-bottom: .5rem;
   font-size: 1rem;
   font-weight: normal;
+}
+
+select {
+  background-color: var(--white);
+  border-radius: 8px;
+  border: none;
+  padding: 1rem .5rem;
+  font-size: 1rem;
 }
 
 video {

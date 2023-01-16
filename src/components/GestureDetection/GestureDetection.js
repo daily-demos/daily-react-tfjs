@@ -1,5 +1,5 @@
 import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
-import './GestureOverlay.css';
+import './GestureDetection.css';
 import { useAppMessage, useLocalParticipant } from '@daily-co/daily-react';
 
 import * as fp from 'fingerpose';
@@ -14,8 +14,8 @@ import thumbsDownGesture from './gestures/ThumbsDown';
 import victoryGesture from './gestures/Victory';
 import vulcanGesture from './gestures/Vulcan';
 
-import useModel from './hooks/useModel';
-import HandPoseLoader from './models/HandPose';
+import useModel from '../../hooks/useModel';
+import HandPoseLoader from '../../models/HandPose';
 
 const landmarkColors = {
   thumb: 'red',
@@ -50,7 +50,7 @@ const knownGestures = [
   vulcanGesture,
 ];
 
-const GestureOverlay = forwardRef((props, ref) => {
+const GestureDetection = forwardRef((props, ref) => {
   const estimator = new fp.GestureEstimator(knownGestures);
   const { modelLoaded, modelRef } = useModel('webgl', HandPoseLoader);
 
@@ -228,4 +228,4 @@ const GestureOverlay = forwardRef((props, ref) => {
     </>
   );
 });
-export default GestureOverlay;
+export default GestureDetection;

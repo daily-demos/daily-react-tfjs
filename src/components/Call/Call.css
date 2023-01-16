@@ -26,3 +26,29 @@
   width: 100%;
   z-index: 2;
 }
+
+.badge {
+  font-size: 10px;
+  font-weight: 600;
+  text-align: inherit;
+  padding: 4px;
+  text-transform: uppercase;
+  background-color: var(--dark-blue);
+  border: 1px solid var(--grey);
+  color: var(--white);
+  margin-top: 5px;
+  border-radius: 4px;
+}
+
+.hand-status,
+.object-status {
+  position: absolute;
+  top: .2rem;
+  right: .5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 2;
+  gap: 6px;
+}
+

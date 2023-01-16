@@ -10,7 +10,7 @@ import './Call.css';
 import Tile from '../Tile/Tile';
 import UserMediaError from '../UserMediaError/UserMediaError';
 
-export default function Call() {
+export default function Call({ model }) {
   /* If a participant runs into a getUserMedia() error, we need to warn them. */
   const [getUserMediaError, setGetUserMediaError] = useState(false);
   const [emojiMessage, setEmojiMessage] = useState('');
@@ -46,7 +46,7 @@ export default function Call() {
         </div>
       )}
       {/* Your self view */}
-      {localParticipant && <Tile id={localParticipant.session_id} isLocal />}
+      {localParticipant && <Tile id={localParticipant.session_id} isLocal model={model} />}
       {/* Remote participants */}
       {remoteParticipantIds && (
         <div className="remote-participants">

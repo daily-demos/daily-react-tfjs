@@ -6,21 +6,6 @@
   height: 100%;
 }
 
-.hand-status {
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  z-index: 2;
-}
-
-.hand-status button {
-  margin-top: 5px;
-  margin-right: 5px;
-}
-
 .debug table {
   background: rgba(0, 0, 0, 0.58);
   color: white;
@@ -34,20 +19,6 @@
 
 #pose-canvas {
   transform: scale(-1, 1);
-}
-
-.badge {
-  font-size: 10px;
-  font-weight: 600;
-  text-align: inherit;
-  padding: 4px;
-  text-transform: uppercase;
-  background-color: var(--dark-blue);
-  border: 1px solid var(--grey);
-  color: var(--white);
-  margin-right: 5px;
-  margin-top: 5px;
-  border-radius: 4px;
 }
 
 .gesture-emoji {

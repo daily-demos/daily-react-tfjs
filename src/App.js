@@ -22,6 +22,7 @@ export default function App() {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
+  const [model, setModel] = useState('gesture-detection');
 
   /**
    * Show the call UI if we're either joining, already joined, or are showing
@@ -33,12 +34,13 @@ export default function App() {
   const showError = [STATE_ERROR].includes(appState);
 
   /**
-   * Starts joining an existing call.
+   * Starts joining an existing call. This function is invoked from HomeScreen.js
    */
-  const startJoiningCall = useCallback((url, username) => {
+  const startJoiningCall = useCallback((url, username, selectedModel) => {
     const newCallObject = DailyIframe.createCallObject();
     newCallObject.setUserName(username);
     newCallObject.join({ url });
+    setModel(selectedModel);
 
     // Set states
     setRoomUrl(url);
@@ -139,7 +141,7 @@ export default function App() {
       )}
       {showCall && (
         <DailyProvider callObject={callObject}>
-          <Call />
+          <Call model={model}/>
           <Tray leaveCall={startLeavingCall} />
         </DailyProvider>
       )}

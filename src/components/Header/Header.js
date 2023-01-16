@@ -5,7 +5,7 @@ export default function Header() {
     <header>
       <div className="header-section">
         <img src="/images/logo.svg" alt="Daily logo" />
-        <span className="title">TensorFlowJS hand detection in a Daily React app</span>
+        <span className="title">TensorFlowJS in a Daily React app</span>
       </div>
       <div className="header-section">
         <a
@@ -18,7 +18,7 @@ export default function Header() {
         </a>
         <a
           className="github-link"
-          href="https://github.com/daily-demos/todo"
+          href="https://github.com/daily-demos/daily-react-tfjs"
           target="_blank"
           rel="noreferrer">
           <img src="/images/github.svg" alt="Github" />
